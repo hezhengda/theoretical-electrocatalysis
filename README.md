@@ -11,7 +11,38 @@ In this project, we will summarize all the most important procedures for getting
 
 If you want to collaborate in the project, you can fork, and join me (maybe later I can change the "me" to "us").
 
+## The structure of this cookbook
+I would like it to be "recipe-like", where you have clear steps for doing specific tasks. And below each steps, we will introduce some technical issues by using the "**toggle**" feature ([sphinx-toggle](https://sphinx-togglebutton.readthedocs.io/en/latest/)), although the user interface is not the prettiest, but it will do the job (for now). And the nice thing about this tool is that we can nest the "toggle", so we can put all the information in one page without getting the page too crowded.
+
+An example is shown below:
+
+```
+.. note:: **Step 1**: Build the structure for your system.
+   :class: dropdown, toggle-shown
+
+   This is the test.
+
+**Step 1**: Build the structure for your system.
+
+.. toggle::
+
+   This is an important toggle.
+
+**Step 2**: Prepare the input file.
+
+.. toggle::
+
+   I think I can add more things in here.
+
+   .. note::
+
+      Maybe I can also add some notes in here.
+```
+
 ## Proposed procedure that we are going to cover in this project 
+
+### How to build structures for the simulation?
+It is really important to learn how to construct different types of materials or chemical systems, because this is the starting point for all the simulation. So we must pay great attention to this question.
 
 ### DFT 
 

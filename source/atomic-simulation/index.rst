@@ -5,5 +5,6 @@ Welcome to the world of atomic simulation
    :maxdepth: 1
    :caption: Table of Contents
 
+   building-structure/index
    DFT/index 
    molecular-dynamics/index 
