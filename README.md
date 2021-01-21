@@ -39,6 +39,11 @@ An example is shown below:
       Maybe I can also add some notes in here.
 ```
 
+> All the examples in this project will contain: 
+> (1) the python script for creating the input files (We are going to use [aiida](https://aiida.readthedocs.io/projects/aiida-core/en/latest/) and [hzdplugins](https://github.com/hezhengda/hzdplugins) for all the simulations)
+> (2) The actual input files (in case some people do not like to use python) 
+> (3) The structural information (.cif file) of the structure.
+
 ## Proposed procedure that we are going to cover in this project 
 
 ### How to build structures for the simulation?

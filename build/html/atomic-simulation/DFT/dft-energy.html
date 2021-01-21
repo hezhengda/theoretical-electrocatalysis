@@ -223,6 +223,66 @@
 <p>Now let’s get into the examples, we will use the adsorption of CO on Pt(111) as our example.</p>
 <div class="section" id="id1">
 <h2><span class="section-number">1.1. </span>Quantum Espresso<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p>If you have the <code class="code docutils literal notranslate"><span class="pre">cif</span></code> file for your structure, then you can use <a class="reference external" href="https://www.materialscloud.org/work/tools/qeinputgenerator">Tools on Materials Cloud</a> to get the input file.</p>
+<p>For our system (<code class="code docutils literal notranslate"><span class="pre">examples/Pt111-CO.cif</span></code>, you can view this from <a class="reference external" href="https://github.com/hezhengda/theoretical-electrocatalysis">github</a> ), the input file for pw.x in Quantum Espresso is:</p>
+<div class="highlight-Bash notranslate"><div class="highlight"><pre><span></span><span class="p">&amp;</span>CONTROL
+<span class="nv">calculation</span> <span class="o">=</span> <span class="s1">&#39;scf&#39;</span>
+<span class="nv">etot_conv_thr</span> <span class="o">=</span>   <span class="m">1</span>.8000000000d-04
+<span class="nv">forc_conv_thr</span> <span class="o">=</span>   <span class="m">1</span>.0000000000d-04
+<span class="nv">outdir</span> <span class="o">=</span> <span class="s1">&#39;./out/&#39;</span>
+<span class="nv">prefix</span> <span class="o">=</span> <span class="s1">&#39;aiida&#39;</span>
+<span class="nv">pseudo_dir</span> <span class="o">=</span> <span class="s1">&#39;./pseudo/&#39;</span>
+<span class="nv">tprnfor</span> <span class="o">=</span> .true.
+<span class="nv">tstress</span> <span class="o">=</span> .true.
+<span class="nv">verbosity</span> <span class="o">=</span> <span class="s1">&#39;high&#39;</span>
+/
+<span class="p">&amp;</span>SYSTEM
+<span class="nv">degauss</span> <span class="o">=</span>   <span class="m">1</span>.4699723600d-02
+<span class="nv">ecutrho</span> <span class="o">=</span>   <span class="m">8</span>.0000000000d+02
+<span class="nv">ecutwfc</span> <span class="o">=</span>   <span class="m">1</span>.0000000000d+02
+<span class="nv">ibrav</span> <span class="o">=</span> <span class="m">0</span>
+<span class="nv">nat</span> <span class="o">=</span> <span class="m">18</span>
+<span class="nv">ntyp</span> <span class="o">=</span> <span class="m">3</span>
+<span class="nv">occupations</span> <span class="o">=</span> <span class="s1">&#39;smearing&#39;</span>
+<span class="nv">smearing</span> <span class="o">=</span> <span class="s1">&#39;cold&#39;</span>
+/
+<span class="p">&amp;</span>ELECTRONS
+<span class="nv">conv_thr</span> <span class="o">=</span>   <span class="m">3</span>.6000000000d-09
+<span class="nv">electron_maxstep</span> <span class="o">=</span> <span class="m">80</span>
+<span class="nv">mixing_beta</span> <span class="o">=</span>   <span class="m">4</span>.0000000000d-01
+/
+ATOMIC_SPECIES
+C      <span class="m">12</span>.011 C.pbesol-n-kjpaw_psl.1.0.0.UPF
+O      <span class="m">15</span>.9994 O.pbesol-n-kjpaw_psl.0.1.UPF
+Pt     <span class="m">195</span>.08 pt_pbesol_v1.4.uspp.F.UPF
+ATOMIC_POSITIONS crystal
+Pt           <span class="m">0</span>.5000000000       <span class="m">0</span>.5000000000       <span class="m">0</span>.3750000000
+Pt          -0.0000000000      -0.0000000000       <span class="m">0</span>.3750000000
+Pt           <span class="m">0</span>.5000000000      -0.0000000000       <span class="m">0</span>.3750000000
+Pt          -0.0000000000       <span class="m">0</span>.5000000000       <span class="m">0</span>.3750000000
+Pt           <span class="m">0</span>.1666700000       <span class="m">0</span>.1666700000       <span class="m">0</span>.4583300000
+Pt           <span class="m">0</span>.6666700000       <span class="m">0</span>.6666700000       <span class="m">0</span>.4583300000
+Pt           <span class="m">0</span>.1666700000       <span class="m">0</span>.6666700000       <span class="m">0</span>.4583300000
+Pt           <span class="m">0</span>.6666700000       <span class="m">0</span>.1666700000       <span class="m">0</span>.4583300000
+Pt           <span class="m">0</span>.8333300000       <span class="m">0</span>.8333300000       <span class="m">0</span>.5416700000
+Pt           <span class="m">0</span>.3333300000       <span class="m">0</span>.3333300000       <span class="m">0</span>.5416700000
+Pt           <span class="m">0</span>.8333300000       <span class="m">0</span>.3333300000       <span class="m">0</span>.5416700000
+Pt           <span class="m">0</span>.3333300000       <span class="m">0</span>.8333300000       <span class="m">0</span>.5416700000
+Pt           <span class="m">0</span>.5000000000       <span class="m">0</span>.5000000000       <span class="m">0</span>.6250000000
+Pt          -0.0000000000       <span class="m">0</span>.0000000000       <span class="m">0</span>.6250000000
+Pt           <span class="m">0</span>.5000000000       <span class="m">0</span>.0000000000       <span class="m">0</span>.6250000000
+Pt          -0.0000000000       <span class="m">0</span>.5000000000       <span class="m">0</span>.6250000000
+C            <span class="m">0</span>.5000000000       <span class="m">0</span>.5000000000       <span class="m">0</span>.6685200000
+O            <span class="m">0</span>.5000000000       <span class="m">0</span>.5000000000       <span class="m">0</span>.7120400000
+K_POINTS automatic
+<span class="m">7</span> <span class="m">7</span> <span class="m">2</span> <span class="m">0</span> <span class="m">0</span> <span class="m">0</span>
+CELL_PARAMETERS angstrom
+    <span class="m">5</span>.6285700000       <span class="m">0</span>.0000000000       <span class="m">0</span>.0000000000
+    <span class="m">2</span>.8142850000       <span class="m">4</span>.8744846070       <span class="m">0</span>.0000000000
+    <span class="m">0</span>.0000000000       <span class="m">0</span>.0000000000      <span class="m">27</span>.5742000000
+</pre></div>
+</div>
+<p>Then you can use <code class="code docutils literal notranslate"><span class="pre">pw.x</span> <span class="pre">-i</span> <span class="pre">INP_PWSCF</span> <span class="pre">&gt;</span> <span class="pre">OUT_PWSCF</span></code> to execute and get the energy of your structure.</p>
 </div>
 <div class="section" id="id2">
 <h2><span class="section-number">1.2. </span>VASP<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>

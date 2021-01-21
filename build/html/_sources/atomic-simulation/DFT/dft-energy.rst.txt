@@ -52,7 +52,69 @@ Now let's get into the examples, we will use the adsorption of CO on Pt(111) as 
 Quantum Espresso 
 -----------------
 
+If you have the :code:`cif` file for your structure, then you can use `Tools on Materials Cloud <https://www.materialscloud.org/work/tools/qeinputgenerator>`_ to get the input file.
 
+For our system (:code:`examples/Pt111-CO.cif`, you can view this from `github <https://github.com/hezhengda/theoretical-electrocatalysis>`_ ), the input file for pw.x in Quantum Espresso is:
+
+.. code-block:: Bash
+
+    &CONTROL
+    calculation = 'scf'
+    etot_conv_thr =   1.8000000000d-04
+    forc_conv_thr =   1.0000000000d-04
+    outdir = './out/'
+    prefix = 'aiida'
+    pseudo_dir = './pseudo/'
+    tprnfor = .true.
+    tstress = .true.
+    verbosity = 'high'
+    /
+    &SYSTEM
+    degauss =   1.4699723600d-02
+    ecutrho =   8.0000000000d+02
+    ecutwfc =   1.0000000000d+02
+    ibrav = 0
+    nat = 18
+    ntyp = 3
+    occupations = 'smearing'
+    smearing = 'cold'
+    /
+    &ELECTRONS
+    conv_thr =   3.6000000000d-09
+    electron_maxstep = 80
+    mixing_beta =   4.0000000000d-01
+    /
+    ATOMIC_SPECIES
+    C      12.011 C.pbesol-n-kjpaw_psl.1.0.0.UPF
+    O      15.9994 O.pbesol-n-kjpaw_psl.0.1.UPF
+    Pt     195.08 pt_pbesol_v1.4.uspp.F.UPF
+    ATOMIC_POSITIONS crystal
+    Pt           0.5000000000       0.5000000000       0.3750000000 
+    Pt          -0.0000000000      -0.0000000000       0.3750000000 
+    Pt           0.5000000000      -0.0000000000       0.3750000000 
+    Pt          -0.0000000000       0.5000000000       0.3750000000 
+    Pt           0.1666700000       0.1666700000       0.4583300000 
+    Pt           0.6666700000       0.6666700000       0.4583300000 
+    Pt           0.1666700000       0.6666700000       0.4583300000 
+    Pt           0.6666700000       0.1666700000       0.4583300000 
+    Pt           0.8333300000       0.8333300000       0.5416700000 
+    Pt           0.3333300000       0.3333300000       0.5416700000 
+    Pt           0.8333300000       0.3333300000       0.5416700000 
+    Pt           0.3333300000       0.8333300000       0.5416700000 
+    Pt           0.5000000000       0.5000000000       0.6250000000 
+    Pt          -0.0000000000       0.0000000000       0.6250000000 
+    Pt           0.5000000000       0.0000000000       0.6250000000 
+    Pt          -0.0000000000       0.5000000000       0.6250000000 
+    C            0.5000000000       0.5000000000       0.6685200000 
+    O            0.5000000000       0.5000000000       0.7120400000 
+    K_POINTS automatic
+    7 7 2 0 0 0
+    CELL_PARAMETERS angstrom
+        5.6285700000       0.0000000000       0.0000000000
+        2.8142850000       4.8744846070       0.0000000000
+        0.0000000000       0.0000000000      27.5742000000
+
+Then you can use :code:`pw.x -i INP_PWSCF > OUT_PWSCF` to execute and get the energy of your structure.
 
 VASP 
 ------
