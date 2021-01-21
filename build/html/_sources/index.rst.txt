@@ -5,26 +5,9 @@ In this project, we will summarize all the possible procedures for calculating c
 
 About the toggle feature mentioned in the README.md will be shown in here (as example):
 
-.. note:: **Step 1**: Build the structure for your system.
-   :class: dropdown, toggle-shown
-
-   This is the test.
-
-**Step 1**: Build the structure for your system.
-
 .. toggle::
 
-   This is an important toggle.
-
-**Step 2**: Prepare the input file.
-
-.. toggle::
-
-   I think I can add more things in here.
-
-   .. note::
-
-      Maybe I can also add some notes in here.
+   This is a toggle.
 
 .. toctree::
    :maxdepth: 1

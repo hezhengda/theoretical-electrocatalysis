@@ -5,6 +5,10 @@ In this project, we will summarize all the possible procedures for calculating c
 
 About the toggle feature mentioned in the README.md will be shown in here (as example):
 
+.. toggle::
+
+   This is a toggle.
+
 .. toctree::
    :maxdepth: 1
    :caption: Table of Contents
