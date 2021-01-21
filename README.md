@@ -1,6 +1,9 @@
 # theoretical-electrocatalysis
 In this repository, we will summarise the procedure of theoretical simulation in electrocatalytic system, it will be a huge task, but it will be interesting to do in the lowdown.
 
+## Official website of this project
+https://theoretical-electrocatalysis.readthedocs.io/en/latest/
+
 ## The purpose of this project
 In theoretical electrocatalysis, there are many procedures and methodologies in order to get the information about certain systems, but these methods are not well-documented, and it is not easy for beginners to quickly learn these procedures, and often in literature they are not stated fully. So this project is established in order to solve this problem.
 

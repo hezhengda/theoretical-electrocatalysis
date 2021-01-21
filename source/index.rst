@@ -6,7 +6,6 @@ In this project, we will summarize all the possible procedures for calculating c
 .. toctree::
    :maxdepth: 1
    :titlesonly:
-   :hidden:
    :caption: Table of Contents
 
    atomic-simulation/index
