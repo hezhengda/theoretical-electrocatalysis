@@ -10,3 +10,12 @@ In theoretical electrocatalysis, there are many procedures and methodologies in 
 In this project, we will summarize all the most important procedures for getting the potential energy profiles, the activation energies, the different ways to do electronic structure analysis, and make them like a book from computer science, usually titled (The cookbook series). It could be useful for the beginners to learn how to do those simulations, and what is good about this project is that we will have some "sample" scripts, not the "extremely elementary" scripts from the tutorial session in the website of the software, but real-life examples of certain systems (could from the paper we have found on the internet.)
 
 If you want to collaborate in the project, you can fork, and join me (maybe later I can change the "me" to "us").
+
+## Proposed procedure that we are going to cover in this project 
+
+### DFT 
+
+* Calculating the potential energy profile of certain mechanism on certain surface (DFT + Vibrational Frequency Analysis)
+* Calculating the activation energy of certain elementary step on certain surface (NEB / CI-NEB)
+* Doing the electronic structure analysis (DOS/PDOS, Charge/Population analysis, Wavefunction Analysis)
+
