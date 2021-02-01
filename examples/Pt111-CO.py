@@ -9,6 +9,7 @@ from ase.io import write
 
 # using hzdplugins
 from hzdplugins.structure.build import bulkFromString, millerSurfaces, adsorptionSites, addAdsorbates
+from hzdplugins.aiidaplugins.submit import qePwOriginalSubmit
 
 # create Pt bulk
 Pt_bulk = bulkFromString('Pt', 'fcc', 3.98, True, [1, 1, 1])

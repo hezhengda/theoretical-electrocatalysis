@@ -7,3 +7,6 @@ Density Functional Theory
    :numbered:
 
    dft-energy
+   vib-freq-analysis
+   dos-pdos
+   dft-u-charge-magnetic

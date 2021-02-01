@@ -49,8 +49,7 @@ So in below, we will introduce how to get the energy from different softwares.
 
 Now let's get into the examples, we will use the adsorption of CO on Pt(111) as our example.
 
-Quantum Espresso 
------------------
+**Quantum Espresso**
 
 If you have the :code:`cif` file for your structure, then you can use `Tools on Materials Cloud <https://www.materialscloud.org/work/tools/qeinputgenerator>`_ to get the input file.
 
@@ -59,36 +58,36 @@ For our system (:code:`examples/Pt111-CO.cif`, you can view this from `github <h
 .. code-block:: Bash
 
     &CONTROL
-    calculation = 'scf'
-    etot_conv_thr =   1.8000000000d-04
-    forc_conv_thr =   1.0000000000d-04
-    outdir = './out/'
-    prefix = 'aiida'
-    pseudo_dir = './pseudo/'
-    tprnfor = .true.
-    tstress = .true.
-    verbosity = 'high'
+    calculation = 'scf' # The type of calculation that you want to make 
+    etot_conv_thr =   1.8000000000d-04 # convergence criteria for total energy 
+    forc_conv_thr =   1.0000000000d-04 # convergence criteria for total force 
+    outdir = './out/' # the output folder
+    prefix = 'aiida' # the prefix, used for output files 
+    pseudo_dir = './pseudo/' # the folder for pseudopotential
+    tprnfor = .true. # print the force in the end 
+    tstress = .true. # print the stress of the cell in the end 
+    verbosity = 'low' # how much information do you want to print 
     /
     &SYSTEM
-    degauss =   1.4699723600d-02
-    ecutrho =   8.0000000000d+02
-    ecutwfc =   1.0000000000d+02
-    ibrav = 0
-    nat = 18
-    ntyp = 3
+    degauss =   1.4699723600d-02 # value for gaussian-smearing 
+    ecutrho =   8.0000000000d+02 # cutoff energy for electronic density 
+    ecutwfc =   1.0000000000d+02 # cutoff energy for wave function
+    ibrav = 0 # means we need to specify cell parameter in the CELL_PARAMETERS part 
+    nat = 18 # number of atoms in our system 
+    ntyp = 3 # number of types of atoms in our system 
     occupations = 'smearing'
     smearing = 'cold'
     /
     &ELECTRONS
-    conv_thr =   3.6000000000d-09
-    electron_maxstep = 80
-    mixing_beta =   4.0000000000d-01
+    conv_thr =   3.6000000000d-09 # convergence criteria for self-consistent field calculation 
+    electron_maxstep = 80 # maximum number of steps of SCF loop
+    mixing_beta =   4.0000000000d-01 # value for mixing the old electronic density with the new one. Like the "training rate" in ML.
     /
-    ATOMIC_SPECIES
+    ATOMIC_SPECIES # specify the types of atoms and the corresponding pseudopotential
     C      12.011 C.pbesol-n-kjpaw_psl.1.0.0.UPF
     O      15.9994 O.pbesol-n-kjpaw_psl.0.1.UPF
     Pt     195.08 pt_pbesol_v1.4.uspp.F.UPF
-    ATOMIC_POSITIONS crystal
+    ATOMIC_POSITIONS crystal # the geometric coordinates of the system, really important!
     Pt           0.5000000000       0.5000000000       0.3750000000 
     Pt          -0.0000000000      -0.0000000000       0.3750000000 
     Pt           0.5000000000      -0.0000000000       0.3750000000 
@@ -107,7 +106,7 @@ For our system (:code:`examples/Pt111-CO.cif`, you can view this from `github <h
     Pt          -0.0000000000       0.5000000000       0.6250000000 
     C            0.5000000000       0.5000000000       0.6685200000 
     O            0.5000000000       0.5000000000       0.7120400000 
-    K_POINTS automatic
+    K_POINTS automatic # The k-point mesh for the system.
     7 7 2 0 0 0
     CELL_PARAMETERS angstrom
         5.6285700000       0.0000000000       0.0000000000
@@ -116,5 +115,4 @@ For our system (:code:`examples/Pt111-CO.cif`, you can view this from `github <h
 
 Then you can use :code:`pw.x -i INP_PWSCF > OUT_PWSCF` to execute and get the energy of your structure.
 
-VASP 
-------
+**VASP** 

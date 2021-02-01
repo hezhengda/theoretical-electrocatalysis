@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Density Functional Theory &mdash; theo-electrocatalysis 0.0.1 documentation</title>
+  <title>3. How to calculate the DOS and PDOS for the system? &mdash; theo-electrocatalysis 0.0.1 documentation</title>
   
 
   
@@ -42,8 +42,8 @@
     
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="1. How to calculate the energy and do geometric relaxation on a chemical system?" href="dft-energy.html" />
-    <link rel="prev" title="How to build the chemical structures?" href="../building-structure/index.html" /> 
+    <link rel="next" title="4. How to get the charge and magnetic moment on each atom?" href="dft-u-charge-magnetic.html" />
+    <link rel="prev" title="2. How to calculate the vibrational frequencies?" href="vib-freq-analysis.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -92,10 +92,10 @@
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">Welcome to the world of atomic simulation</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../building-structure/index.html">How to build the chemical structures?</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Density Functional Theory</a><ul>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Density Functional Theory</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="dft-energy.html">1. How to calculate the energy and do geometric relaxation on a chemical system?</a></li>
 <li class="toctree-l3"><a class="reference internal" href="vib-freq-analysis.html">2. How to calculate the vibrational frequencies?</a></li>
-<li class="toctree-l3"><a class="reference internal" href="dos-pdos.html">3. How to calculate the DOS and PDOS for the system?</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">3. How to calculate the DOS and PDOS for the system?</a></li>
 <li class="toctree-l3"><a class="reference internal" href="dft-u-charge-magnetic.html">4. How to get the charge and magnetic moment on each atom?</a></li>
 </ul>
 </li>
@@ -154,13 +154,15 @@
         
           <li><a href="../index.html">Welcome to the world of atomic simulation</a> &raquo;</li>
         
-      <li>Density Functional Theory</li>
+          <li><a href="index.html">Density Functional Theory</a> &raquo;</li>
+        
+      <li><span class="section-number">3. </span>How to calculate the DOS and PDOS for the system?</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
           
-            <a href="../../_sources/atomic-simulation/DFT/index.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../../_sources/atomic-simulation/DFT/dos-pdos.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -173,17 +175,27 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="density-functional-theory">
-<h1>Density Functional Theory<a class="headerlink" href="#density-functional-theory" title="Permalink to this headline">¶</a></h1>
-<div class="toctree-wrapper compound">
-<p class="caption"><span class="caption-text">Recipes</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="dft-energy.html">1. How to calculate the energy and do geometric relaxation on a chemical system?</a></li>
-<li class="toctree-l1"><a class="reference internal" href="vib-freq-analysis.html">2. How to calculate the vibrational frequencies?</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dos-pdos.html">3. How to calculate the DOS and PDOS for the system?</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dft-u-charge-magnetic.html">4. How to get the charge and magnetic moment on each atom?</a></li>
-</ul>
+  <div class="section" id="how-to-calculate-the-dos-and-pdos-for-the-system">
+<h1><span class="section-number">3. </span>How to calculate the DOS and PDOS for the system?<a class="headerlink" href="#how-to-calculate-the-dos-and-pdos-for-the-system" title="Permalink to this headline">¶</a></h1>
+<p>The DOS and PDOS can help us understand the electronic structure of the material or specific atom. These information can be very helpful in understanding the activity of certain reactions among different catalysts and also analyze the bonding between atoms.</p>
+<p><strong>Quantum Espresso</strong></p>
+<p>In Quantum Espresso, the procedure for calculating DOS or PDOS has 4 steps:</p>
+<p><strong>Step 1</strong>: Do the geometric optimization of the structure, you can see that in <a class="reference internal" href="dft-energy.html#how-to-calculate-the-energy-and-do-geometric-relaxation-on-a-chemical-system"><span class="std std-ref">How to calculate the energy and do geometric relaxation on a chemical system?</span></a></p>
+<p><strong>Step 2</strong>: Do the SCF calculation (replace the <code class="code docutils literal notranslate"><span class="pre">calculation</span></code> from <code class="code docutils literal notranslate"><span class="pre">relax/vc-relax</span></code> to <code class="code docutils literal notranslate"><span class="pre">scf</span></code>)</p>
+<p><strong>Step 3</strong>: Keep the output file and do the NSCF calculation (replace the <code class="code docutils literal notranslate"><span class="pre">calculation</span></code> from <code class="code docutils literal notranslate"><span class="pre">scf</span></code> to <code class="code docutils literal notranslate"><span class="pre">nscf</span></code>)</p>
+<p><strong>Step 4</strong>: In the same directory, create a file named <code class="code docutils literal notranslate"><span class="pre">INP_PROJWFC</span></code>, the content is shown in below:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="p">&amp;</span>PROJWFC
+<span class="nv">DeltaE</span> <span class="o">=</span> <span class="m">0</span>.01
+<span class="nv">ngauss</span> <span class="o">=</span> <span class="m">0</span>
+<span class="nv">degauss</span> <span class="o">=</span> <span class="m">0</span>.015
+<span class="nv">Emin</span> <span class="o">=</span> -40
+<span class="nv">Emax</span> <span class="o">=</span> <span class="m">40</span>
+</pre></div>
 </div>
+<p>Then you can use <code class="code docutils literal notranslate"><span class="pre">projwfc.x</span></code> to execute it: <code class="code docutils literal notranslate"><span class="pre">projwfc.x</span> <span class="pre">-i</span> <span class="pre">INP_PROJWFC</span> <span class="pre">&gt;</span> <span class="pre">OUT_PROJWFC</span></code>. For calculating DOS, you can use <code class="code docutils literal notranslate"><span class="pre">dos.x</span></code>, the input parameters can be seen in <a class="reference external" href="https://www.quantum-espresso.org/Doc/INPUT_DOS.html">this link</a></p>
+<p>After that, you can use <code class="code docutils literal notranslate"><span class="pre">pp.x</span></code> to do the post-process procedure, or you can use python or other softwares to do the plotting and further analysis.</p>
+<p><strong>VASP</strong></p>
+<p>In VASP it is really easy, just add <code class="code docutils literal notranslate"><span class="pre">LORBIT=11</span></code> in your <code class="code docutils literal notranslate"><span class="pre">INCAR</span></code></p>
 </div>
 
 
@@ -192,8 +204,8 @@
           </div>
           <footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="dft-energy.html" class="btn btn-neutral float-right" title="1. How to calculate the energy and do geometric relaxation on a chemical system?" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-        <a href="../building-structure/index.html" class="btn btn-neutral float-left" title="How to build the chemical structures?" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="dft-u-charge-magnetic.html" class="btn btn-neutral float-right" title="4. How to get the charge and magnetic moment on each atom?" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="vib-freq-analysis.html" class="btn btn-neutral float-left" title="2. How to calculate the vibrational frequencies?" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 
   <hr/>
