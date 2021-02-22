@@ -188,7 +188,7 @@ hubbard_u<span class="o">(</span><span class="m">1</span><span class="o">)</span
 <span class="nv">nspin</span> <span class="o">=</span> <span class="m">2</span>
 <span class="nv">tot_magnetization</span> <span class="o">=</span> <span class="c1">#some number</span>
 starting_magnetization<span class="o">(</span><span class="m">1</span><span class="o">)</span> <span class="o">=</span> <span class="m">0</span>.1
-starting_ns_eigenvalue<span class="o">(</span><span class="m">1</span>, <span class="m">1</span>, <span class="m">1</span><span class="o">)</span> <span class="o">=</span> <span class="m">1</span>.0 <span class="c1"># this is for finely tuning the initial magnetization</span>
+starting_ns_eigenvalue<span class="o">(</span><span class="m">1</span>, <span class="m">1</span>, <span class="m">1</span><span class="o">)</span> <span class="o">=</span> <span class="m">1</span>.0 <span class="c1"># this is for finely tuning the initial magnetization, the first number is the index of the orbital (e.g. for d band it ranges from 1 to 5), the second number is the index of spin (1 or 2), the third number is the index of the atom (see that in ATOMIC SPECIES in the input file).</span>
 
 <span class="c1"># if you want to constrain the magnetic moment</span>
 <span class="p">&amp;</span>ELECTRONS

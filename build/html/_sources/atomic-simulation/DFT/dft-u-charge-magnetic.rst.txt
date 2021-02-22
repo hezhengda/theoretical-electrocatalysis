@@ -17,7 +17,7 @@ In Quantum Espresso, we can do this by adding (1) U parameter and (2) spin polar
     nspin = 2
     tot_magnetization = #some number 
     starting_magnetization(1) = 0.1
-    starting_ns_eigenvalue(1, 1, 1) = 1.0 # this is for finely tuning the initial magnetization
+    starting_ns_eigenvalue(1, 1, 1) = 1.0 # this is for finely tuning the initial magnetization, the first number is the index of the orbital (e.g. for d band it ranges from 1 to 5), the second number is the index of spin (1 or 2), the third number is the index of the atom (see that in ATOMIC SPECIES in the input file).
 
     # if you want to constrain the magnetic moment 
     &ELECTRONS 
