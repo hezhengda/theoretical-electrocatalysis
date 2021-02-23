@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>1. How to calculate the energy and do geometric relaxation on a chemical system? &mdash; theo-electrocatalysis 0.0.1 documentation</title>
+  <title>How to calculate the energy and do geometric relaxation on a chemical system? &mdash; theo-electrocatalysis 0.0.1 documentation</title>
   
 
   
@@ -42,8 +42,8 @@
     
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="2. How to calculate the vibrational frequencies?" href="vib-freq-analysis.html" />
-    <link rel="prev" title="Density Functional Theory" href="index.html" /> 
+    <link rel="next" title="How to calculate the vibrational frequencies?" href="vib-freq-analysis.html" />
+    <link rel="prev" title="How to write your own DFT code" href="build-dft-code.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -90,13 +90,21 @@
             
               <p class="caption"><span class="caption-text">Table of Contents</span></p>
 <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../fundamental-knowledge/index.html">Fundamental knowledge for simulation</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">Welcome to the world of atomic simulation</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../building-structure/index.html">How to build the chemical structures?</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="index.html">Density Functional Theory</a><ul class="current">
-<li class="toctree-l3 current"><a class="current reference internal" href="#">1. How to calculate the energy and do geometric relaxation on a chemical system?</a></li>
-<li class="toctree-l3"><a class="reference internal" href="vib-freq-analysis.html">2. How to calculate the vibrational frequencies?</a></li>
-<li class="toctree-l3"><a class="reference internal" href="dos-pdos.html">3. How to calculate the DOS and PDOS for the system?</a></li>
-<li class="toctree-l3"><a class="reference internal" href="dft-u-charge-magnetic.html">4. How to get the charge and magnetic moment on each atom?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="useful-resources.html">Useful resources about DFT</a></li>
+<li class="toctree-l3"><a class="reference internal" href="build-dft-code.html">How to write your own DFT code</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">How to calculate the energy and do geometric relaxation on a chemical system?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="vib-freq-analysis.html">How to calculate the vibrational frequencies?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dos-pdos.html">How to calculate the DOS and PDOS for the system?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dft-u-charge-magnetic.html">How to get the charge and magnetic moment on each atom?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="quantum-espresso.html">Quantum Espresso</a></li>
+<li class="toctree-l3"><a class="reference internal" href="vasp.html">VASP</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jdftx.html">JDFTx</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gpaw.html">GPAW</a></li>
+<li class="toctree-l3"><a class="reference internal" href="siesta.html">SIESTA</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../molecular-dynamics/index.html">Molecular Dynamics</a></li>
@@ -156,7 +164,7 @@
         
           <li><a href="index.html">Density Functional Theory</a> &raquo;</li>
         
-      <li><span class="section-number">1. </span>How to calculate the energy and do geometric relaxation on a chemical system?</li>
+      <li>How to calculate the energy and do geometric relaxation on a chemical system?</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -176,7 +184,7 @@
            <div itemprop="articleBody">
             
   <div class="section" id="how-to-calculate-the-energy-and-do-geometric-relaxation-on-a-chemical-system">
-<h1><span class="section-number">1. </span>How to calculate the energy and do geometric relaxation on a chemical system?<a class="headerlink" href="#how-to-calculate-the-energy-and-do-geometric-relaxation-on-a-chemical-system" title="Permalink to this headline">¶</a></h1>
+<h1>How to calculate the energy and do geometric relaxation on a chemical system?<a class="headerlink" href="#how-to-calculate-the-energy-and-do-geometric-relaxation-on-a-chemical-system" title="Permalink to this headline">¶</a></h1>
 <p>If we want to calculate the energy, we will need:</p>
 <ul class="simple">
 <li><p>The structure of the chemical system (The detailed discussion about how to construct the chemical system are shown in this page: <a class="reference internal" href="../building-structure/index.html#how-to-build-the-chemical-structures"><span class="std std-ref">How to build the chemical structures?</span></a>)</p></li>
@@ -221,68 +229,6 @@
 </div>
 </div>
 <p>Now let’s get into the examples, we will use the adsorption of CO on Pt(111) as our example.</p>
-<p><strong>Quantum Espresso</strong></p>
-<p>If you have the <code class="code docutils literal notranslate"><span class="pre">cif</span></code> file for your structure, then you can use <a class="reference external" href="https://www.materialscloud.org/work/tools/qeinputgenerator">Tools on Materials Cloud</a> to get the input file.</p>
-<p>For our system (<code class="code docutils literal notranslate"><span class="pre">examples/Pt111-CO.cif</span></code>, you can view this from <a class="reference external" href="https://github.com/hezhengda/theoretical-electrocatalysis">github</a> ), the input file for pw.x in Quantum Espresso is:</p>
-<div class="highlight-Bash notranslate"><div class="highlight"><pre><span></span><span class="p">&amp;</span>CONTROL
-<span class="nv">calculation</span> <span class="o">=</span> <span class="s1">&#39;scf&#39;</span> <span class="c1"># The type of calculation that you want to make</span>
-<span class="nv">etot_conv_thr</span> <span class="o">=</span>   <span class="m">1</span>.8000000000d-04 <span class="c1"># convergence criteria for total energy</span>
-<span class="nv">forc_conv_thr</span> <span class="o">=</span>   <span class="m">1</span>.0000000000d-04 <span class="c1"># convergence criteria for total force</span>
-<span class="nv">outdir</span> <span class="o">=</span> <span class="s1">&#39;./out/&#39;</span> <span class="c1"># the output folder</span>
-<span class="nv">prefix</span> <span class="o">=</span> <span class="s1">&#39;aiida&#39;</span> <span class="c1"># the prefix, used for output files</span>
-<span class="nv">pseudo_dir</span> <span class="o">=</span> <span class="s1">&#39;./pseudo/&#39;</span> <span class="c1"># the folder for pseudopotential</span>
-<span class="nv">tprnfor</span> <span class="o">=</span> .true. <span class="c1"># print the force in the end</span>
-<span class="nv">tstress</span> <span class="o">=</span> .true. <span class="c1"># print the stress of the cell in the end</span>
-<span class="nv">verbosity</span> <span class="o">=</span> <span class="s1">&#39;low&#39;</span> <span class="c1"># how much information do you want to print</span>
-/
-<span class="p">&amp;</span>SYSTEM
-<span class="nv">degauss</span> <span class="o">=</span>   <span class="m">1</span>.4699723600d-02 <span class="c1"># value for gaussian-smearing</span>
-<span class="nv">ecutrho</span> <span class="o">=</span>   <span class="m">8</span>.0000000000d+02 <span class="c1"># cutoff energy for electronic density</span>
-<span class="nv">ecutwfc</span> <span class="o">=</span>   <span class="m">1</span>.0000000000d+02 <span class="c1"># cutoff energy for wave function</span>
-<span class="nv">ibrav</span> <span class="o">=</span> <span class="m">0</span> <span class="c1"># means we need to specify cell parameter in the CELL_PARAMETERS part</span>
-<span class="nv">nat</span> <span class="o">=</span> <span class="m">18</span> <span class="c1"># number of atoms in our system</span>
-<span class="nv">ntyp</span> <span class="o">=</span> <span class="m">3</span> <span class="c1"># number of types of atoms in our system</span>
-<span class="nv">occupations</span> <span class="o">=</span> <span class="s1">&#39;smearing&#39;</span>
-<span class="nv">smearing</span> <span class="o">=</span> <span class="s1">&#39;cold&#39;</span>
-/
-<span class="p">&amp;</span>ELECTRONS
-<span class="nv">conv_thr</span> <span class="o">=</span>   <span class="m">3</span>.6000000000d-09 <span class="c1"># convergence criteria for self-consistent field calculation</span>
-<span class="nv">electron_maxstep</span> <span class="o">=</span> <span class="m">80</span> <span class="c1"># maximum number of steps of SCF loop</span>
-<span class="nv">mixing_beta</span> <span class="o">=</span>   <span class="m">4</span>.0000000000d-01 <span class="c1"># value for mixing the old electronic density with the new one. Like the &quot;training rate&quot; in ML.</span>
-/
-ATOMIC_SPECIES <span class="c1"># specify the types of atoms and the corresponding pseudopotential</span>
-C      <span class="m">12</span>.011 C.pbesol-n-kjpaw_psl.1.0.0.UPF
-O      <span class="m">15</span>.9994 O.pbesol-n-kjpaw_psl.0.1.UPF
-Pt     <span class="m">195</span>.08 pt_pbesol_v1.4.uspp.F.UPF
-ATOMIC_POSITIONS crystal <span class="c1"># the geometric coordinates of the system, really important!</span>
-Pt           <span class="m">0</span>.5000000000       <span class="m">0</span>.5000000000       <span class="m">0</span>.3750000000
-Pt          -0.0000000000      -0.0000000000       <span class="m">0</span>.3750000000
-Pt           <span class="m">0</span>.5000000000      -0.0000000000       <span class="m">0</span>.3750000000
-Pt          -0.0000000000       <span class="m">0</span>.5000000000       <span class="m">0</span>.3750000000
-Pt           <span class="m">0</span>.1666700000       <span class="m">0</span>.1666700000       <span class="m">0</span>.4583300000
-Pt           <span class="m">0</span>.6666700000       <span class="m">0</span>.6666700000       <span class="m">0</span>.4583300000
-Pt           <span class="m">0</span>.1666700000       <span class="m">0</span>.6666700000       <span class="m">0</span>.4583300000
-Pt           <span class="m">0</span>.6666700000       <span class="m">0</span>.1666700000       <span class="m">0</span>.4583300000
-Pt           <span class="m">0</span>.8333300000       <span class="m">0</span>.8333300000       <span class="m">0</span>.5416700000
-Pt           <span class="m">0</span>.3333300000       <span class="m">0</span>.3333300000       <span class="m">0</span>.5416700000
-Pt           <span class="m">0</span>.8333300000       <span class="m">0</span>.3333300000       <span class="m">0</span>.5416700000
-Pt           <span class="m">0</span>.3333300000       <span class="m">0</span>.8333300000       <span class="m">0</span>.5416700000
-Pt           <span class="m">0</span>.5000000000       <span class="m">0</span>.5000000000       <span class="m">0</span>.6250000000
-Pt          -0.0000000000       <span class="m">0</span>.0000000000       <span class="m">0</span>.6250000000
-Pt           <span class="m">0</span>.5000000000       <span class="m">0</span>.0000000000       <span class="m">0</span>.6250000000
-Pt          -0.0000000000       <span class="m">0</span>.5000000000       <span class="m">0</span>.6250000000
-C            <span class="m">0</span>.5000000000       <span class="m">0</span>.5000000000       <span class="m">0</span>.6685200000
-O            <span class="m">0</span>.5000000000       <span class="m">0</span>.5000000000       <span class="m">0</span>.7120400000
-K_POINTS automatic <span class="c1"># The k-point mesh for the system.</span>
-<span class="m">7</span> <span class="m">7</span> <span class="m">2</span> <span class="m">0</span> <span class="m">0</span> <span class="m">0</span>
-CELL_PARAMETERS angstrom
-    <span class="m">5</span>.6285700000       <span class="m">0</span>.0000000000       <span class="m">0</span>.0000000000
-    <span class="m">2</span>.8142850000       <span class="m">4</span>.8744846070       <span class="m">0</span>.0000000000
-    <span class="m">0</span>.0000000000       <span class="m">0</span>.0000000000      <span class="m">27</span>.5742000000
-</pre></div>
-</div>
-<p>Then you can use <code class="code docutils literal notranslate"><span class="pre">pw.x</span> <span class="pre">-i</span> <span class="pre">INP_PWSCF</span> <span class="pre">&gt;</span> <span class="pre">OUT_PWSCF</span></code> to execute and get the energy of your structure.</p>
-<p><strong>VASP</strong></p>
 </div>
 
 
@@ -291,8 +237,8 @@ CELL_PARAMETERS angstrom
           </div>
           <footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="vib-freq-analysis.html" class="btn btn-neutral float-right" title="2. How to calculate the vibrational frequencies?" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-        <a href="index.html" class="btn btn-neutral float-left" title="Density Functional Theory" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="vib-freq-analysis.html" class="btn btn-neutral float-right" title="How to calculate the vibrational frequencies?" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="build-dft-code.html" class="btn btn-neutral float-left" title="How to write your own DFT code" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 
   <hr/>

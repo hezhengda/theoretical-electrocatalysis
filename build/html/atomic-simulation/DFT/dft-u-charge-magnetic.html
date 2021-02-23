@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>4. How to get the charge and magnetic moment on each atom? &mdash; theo-electrocatalysis 0.0.1 documentation</title>
+  <title>How to get the charge and magnetic moment on each atom? &mdash; theo-electrocatalysis 0.0.1 documentation</title>
   
 
   
@@ -42,8 +42,8 @@
     
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Molecular Dynamics" href="../molecular-dynamics/index.html" />
-    <link rel="prev" title="3. How to calculate the DOS and PDOS for the system?" href="dos-pdos.html" /> 
+    <link rel="next" title="Quantum Espresso" href="quantum-espresso.html" />
+    <link rel="prev" title="How to calculate the DOS and PDOS for the system?" href="dos-pdos.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -90,13 +90,24 @@
             
               <p class="caption"><span class="caption-text">Table of Contents</span></p>
 <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../fundamental-knowledge/index.html">Fundamental knowledge for simulation</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">Welcome to the world of atomic simulation</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../building-structure/index.html">How to build the chemical structures?</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="index.html">Density Functional Theory</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="dft-energy.html">1. How to calculate the energy and do geometric relaxation on a chemical system?</a></li>
-<li class="toctree-l3"><a class="reference internal" href="vib-freq-analysis.html">2. How to calculate the vibrational frequencies?</a></li>
-<li class="toctree-l3"><a class="reference internal" href="dos-pdos.html">3. How to calculate the DOS and PDOS for the system?</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">4. How to get the charge and magnetic moment on each atom?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="useful-resources.html">Useful resources about DFT</a></li>
+<li class="toctree-l3"><a class="reference internal" href="build-dft-code.html">How to write your own DFT code</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dft-energy.html">How to calculate the energy and do geometric relaxation on a chemical system?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="vib-freq-analysis.html">How to calculate the vibrational frequencies?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dos-pdos.html">How to calculate the DOS and PDOS for the system?</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">How to get the charge and magnetic moment on each atom?</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#several-ways-to-converge-the-simulation">Several ways to converge the simulation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="quantum-espresso.html">Quantum Espresso</a></li>
+<li class="toctree-l3"><a class="reference internal" href="vasp.html">VASP</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jdftx.html">JDFTx</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gpaw.html">GPAW</a></li>
+<li class="toctree-l3"><a class="reference internal" href="siesta.html">SIESTA</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../molecular-dynamics/index.html">Molecular Dynamics</a></li>
@@ -156,7 +167,7 @@
         
           <li><a href="index.html">Density Functional Theory</a> &raquo;</li>
         
-      <li><span class="section-number">4. </span>How to get the charge and magnetic moment on each atom?</li>
+      <li>How to get the charge and magnetic moment on each atom?</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -176,24 +187,15 @@
            <div itemprop="articleBody">
             
   <div class="section" id="how-to-get-the-charge-and-magnetic-moment-on-each-atom">
-<h1><span class="section-number">4. </span>How to get the charge and magnetic moment on each atom?<a class="headerlink" href="#how-to-get-the-charge-and-magnetic-moment-on-each-atom" title="Permalink to this headline">¶</a></h1>
+<h1>How to get the charge and magnetic moment on each atom?<a class="headerlink" href="#how-to-get-the-charge-and-magnetic-moment-on-each-atom" title="Permalink to this headline">¶</a></h1>
 <p>It has already been shown in (1) <a class="reference internal" href="dft-energy.html#how-to-calculate-the-energy-and-do-geometric-relaxation-on-a-chemical-system"><span class="std std-ref">How to calculate the energy and do geometric relaxation on a chemical system?</span></a> and (2) <a class="reference internal" href="dos-pdos.html#how-to-calculate-the-dos-and-pdos-for-the-system"><span class="std std-ref">How to calculate the DOS and PDOS for the system?</span></a> how to get the energy and (projected) density of states, which can be very useful in explaining the experimental trends or do mechanistic analysis. But sometimes we want to have more information about the system, for example, for magnetic system, we would like to know the distribution of magnetic moments inside the material, and we also want to know the exact charge on different atoms. For doing this we need more input parameters to finely controlled the DFT code.</p>
-<p><strong>Quantum Espresso</strong></p>
-<p>In Quantum Espresso, we can do this by adding (1) U parameter and (2) spin polarized simulation, which means we need to add the following parameters to our <code class="code docutils literal notranslate"><span class="pre">INP_PWSCF</span></code> file mentioned in <a class="reference internal" href="dft-energy.html#how-to-calculate-the-energy-and-do-geometric-relaxation-on-a-chemical-system"><span class="std std-ref">How to calculate the energy and do geometric relaxation on a chemical system?</span></a></p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># for DFT+U settings</span>
-<span class="nv">lda_plus_u</span> <span class="o">=</span> .true.
-hubbard_u<span class="o">(</span><span class="m">1</span><span class="o">)</span> <span class="o">=</span> <span class="m">5</span>.0
-
-<span class="c1"># for spin-polarization settings</span>
-<span class="nv">nspin</span> <span class="o">=</span> <span class="m">2</span>
-<span class="nv">tot_magnetization</span> <span class="o">=</span> <span class="c1">#some number</span>
-starting_magnetization<span class="o">(</span><span class="m">1</span><span class="o">)</span> <span class="o">=</span> <span class="m">0</span>.1
-starting_ns_eigenvalue<span class="o">(</span><span class="m">1</span>, <span class="m">1</span>, <span class="m">1</span><span class="o">)</span> <span class="o">=</span> <span class="m">1</span>.0 <span class="c1"># this is for finely tuning the initial magnetization, the first number is the index of the orbital (e.g. for d band it ranges from 1 to 5), the second number is the index of spin (1 or 2), the third number is the index of the atom (see that in ATOMIC SPECIES in the input file).</span>
-
-<span class="c1"># if you want to constrain the magnetic moment</span>
-<span class="p">&amp;</span>ELECTRONS
-<span class="nv">mixing_fixed_ns</span> <span class="o">=</span> <span class="m">10</span> <span class="c1"># In 10 SCF steps, the magnetic moment will be the same as mentioned in starting_ns_eigenvalue.</span>
-</pre></div>
+<div class="section" id="several-ways-to-converge-the-simulation">
+<h2>Several ways to converge the simulation<a class="headerlink" href="#several-ways-to-converge-the-simulation" title="Permalink to this headline">¶</a></h2>
+<p>In this section, I will discuss several practical experience in doing difficult simulations (e.g. with spin polarization and DFT+U method, and also with uncertain structures):</p>
+<ul class="simple">
+<li><p>Usually we want to calculate more complicated simulation from a converged structure. For example, if we want to calculate the DFT+U and spin polarized simulation, then first we can do geometric optimization on the structure (with plain DFT), then add the U parameter and spin configuration and do further simulations.</p></li>
+<li></li>
+</ul>
 </div>
 </div>
 
@@ -203,8 +205,8 @@ starting_ns_eigenvalue<span class="o">(</span><span class="m">1</span>, <span cl
           </div>
           <footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="../molecular-dynamics/index.html" class="btn btn-neutral float-right" title="Molecular Dynamics" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-        <a href="dos-pdos.html" class="btn btn-neutral float-left" title="3. How to calculate the DOS and PDOS for the system?" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="quantum-espresso.html" class="btn btn-neutral float-right" title="Quantum Espresso" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="dos-pdos.html" class="btn btn-neutral float-left" title="How to calculate the DOS and PDOS for the system?" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 
   <hr/>

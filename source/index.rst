@@ -13,6 +13,7 @@ About the toggle feature mentioned in the README.md will be shown in here (as ex
    :maxdepth: 1
    :caption: Table of Contents
 
+   fundamental-knowledge/index
    atomic-simulation/index
    mean-field-theory/index
    macroscopic-simulation/index 
